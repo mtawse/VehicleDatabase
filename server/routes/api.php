@@ -13,6 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::get('manufacturers', 'ManufacturerController@index');
+Route::get('manufacturers/{manufacturer}/models', 'ManufacturerController@getModels')
+    ->where('manufacturer', '[0-9]+');
+Route::get('manufacturers/{manufacturer}/vehicles', 'ManufacturerController@getVehicles')
+    ->where('manufacturer', '[0-9]+');
+Route::get('manufacturers/{manufacturer}', 'ManufacturerController@show')
+    ->where('manufacturer', '[0-9]+');
+
+
+Route::get('vehicles', 'VehicleController@index');
+Route::get('vehicles/{vehicle}', 'VehicleController@show')
+    ->where('vehicle', '[0-9]+');
+
+
+
+Route::fallback(function(){
+    return response()->json(['message' => 'Not Found.'], 404);
+})->name('api.fallback.404');
