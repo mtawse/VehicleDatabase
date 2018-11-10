@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Vehicle;
 use Illuminate\Http\Request;
+use App\Http\Resources\VehicleResource;
 
 class VehicleController extends Controller
 {
     public function index()
     {
-        return response()->json(Vehicle::all(), 200);
+        return VehicleResource::collection(Vehicle::all());
     }
 
 
     public function show(Vehicle $vehicle)
     {
-        return response()->json($vehicle->with('owner')->get(), 200);
+        $vehicle = Vehicle::with('owner')->find($vehicle->id);
+        return new VehicleResource($vehicle);
     }
 }

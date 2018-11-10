@@ -10,7 +10,7 @@ class ManufacturerController extends Controller
 {
     public function index()
     {
-        return response()->json(Manufacturer::all(), 200);
+        return ManufacturerResource::collection(Manufacturer::all());
     }
 
 

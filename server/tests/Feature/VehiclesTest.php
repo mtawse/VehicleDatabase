@@ -20,7 +20,7 @@ class VehiclesTest extends TestCase
         $this->json('GET', '/api/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJsonCount(5)
+            ->assertJsonCount(5, 'data')
             ->assertSee($vehicles->first()->type)
             ->assertSee($vehicles->last()->license_plate);
 
@@ -34,7 +34,6 @@ class VehiclesTest extends TestCase
         $this->json('GET', '/api/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJsonCount(5)
             ->assertSee($vehicles->first()->manufacturer->name)
             ->assertSee($vehicles->first()->model->name)
             ->assertSee($vehicles->last()->manufacturer->name)
@@ -44,6 +43,8 @@ class VehiclesTest extends TestCase
     /** @test */
     public function a_json_response_of_a_single_vehicle_is_returned()
     {
+        $this->withoutExceptionHandling();
+
         $vehicle = factory(Vehicle::class)->create();
 
         $this->json('GET', '/api/vehicles/' . $vehicle->id)
@@ -56,6 +57,8 @@ class VehiclesTest extends TestCase
     /** @test */
     public function when_a_single_vehicle_is_returned_related_data_is_also_returned()
     {
+        $this->withoutExceptionHandling();
+
         $vehicle = factory(Vehicle::class)->create();
 
         $this->json('GET', '/api/vehicles/' . $vehicle->id)

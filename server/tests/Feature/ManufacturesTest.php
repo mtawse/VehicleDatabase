@@ -22,7 +22,7 @@ class ManufacturesTest extends TestCase
         $this->json('GET', '/api/manufacturers')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJsonCount(5)
+            ->assertJsonCount(5, 'data')
             ->assertSee($manufacturers->first()->name)
             ->assertSee($manufacturers->last()->name);
 
