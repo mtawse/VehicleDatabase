@@ -11,12 +11,12 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
+        factory(App\User::class)->create();
+
         $manufacturers = factory(App\Manufacturer::class, 7)->create();
 
         factory(App\Vehicle::class, 20)->create([
             'manufacturer_id' => $manufacturers->random()->id,
         ]);
-
-        //dd(App\Vehicle::all());
     }
 }

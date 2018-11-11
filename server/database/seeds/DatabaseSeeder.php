@@ -1,8 +1,5 @@
 <?php
 
-use App\Owner;
-use App\Manufacturer;
-use App\Vehicle;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            //OwnersTableSeeder::class,
-            //ManufacturersTableSeeder::class,
+            UsersTableSeeder::class,
             VehiclesTableSeeder::class,
         ]);
     }

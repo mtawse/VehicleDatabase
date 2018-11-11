@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use App\Model;
 use App\Manufacturer;
 use App\Vehicle;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,12 +16,34 @@ class ManufacturesTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $user;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create(
+            ['password' => Hash::make('password')]
+        );
+    }
+
+    /** @test */
+    public function unauthenticated_users_cannot_access_the_manufacturers_resource()
+    {
+        $this->json('GET', '/api/vehicles')
+            ->assertStatus(401);
+
+        $this->json('GET', '/api/vehicles/1')
+            ->assertStatus(401);
+    }
+
     /** @test */
     public function a_json_response_of_manufacturers_is_returned()
     {
         $manufacturers = factory(Manufacturer::class, 5)->create();
 
-        $this->json('GET', '/api/manufacturers')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/manufacturers')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertJsonCount(5, 'data')
@@ -33,7 +57,8 @@ class ManufacturesTest extends TestCase
     {
         $manufacturer = factory(Manufacturer::class)->create();
 
-        $this->json('GET', '/api/manufacturers/' . $manufacturer->id)
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/manufacturers/' . $manufacturer->id)
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($manufacturer->name);
@@ -47,7 +72,8 @@ class ManufacturesTest extends TestCase
         $manufacturer = factory(Manufacturer::class)->create();
         $models = factory(Model::class, 5)->create(['manufacturer_id' => $manufacturer->id]);
 
-        $this->json('GET', '/api/manufacturers/' . $manufacturer->id . '/models')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/manufacturers/' . $manufacturer->id . '/models')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($models->first()->name)
@@ -61,7 +87,8 @@ class ManufacturesTest extends TestCase
         $manufacturer = factory(Manufacturer::class)->create();
         $vehicles = factory(Vehicle::class, 5)->create(['manufacturer_id' => $manufacturer->id]);
 
-        $this->json('GET', '/api/manufacturers/' . $manufacturer->id . '/vehicles')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/manufacturers/' . $manufacturer->id . '/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($vehicles->first()->license_plate)
@@ -72,7 +99,8 @@ class ManufacturesTest extends TestCase
     /** @test */
     public function an_incorrect_request_for_a_manufacturer_returns_json_404()
     {
-        $this->json('GET', '/api/manufacturers/not-found')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/manufacturers/not-found')
             ->assertStatus(404)
             ->assertHeader('Content-Type', 'application/json')
             ->assertJson([

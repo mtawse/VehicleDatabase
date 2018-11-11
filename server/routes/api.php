@@ -13,22 +13,34 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 
-Route::get('manufacturers', 'ManufacturerController@index');
-Route::get('manufacturers/{manufacturer}/models', 'ManufacturerController@getModels')
-    ->where('manufacturer', '[0-9]+');
-Route::get('manufacturers/{manufacturer}/vehicles', 'ManufacturerController@getVehicles')
-    ->where('manufacturer', '[0-9]+');
-Route::get('manufacturers/{manufacturer}', 'ManufacturerController@show')
-    ->where('manufacturer', '[0-9]+');
+Route::group(['prefix' => 'auth'], function () {
 
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 
-Route::get('vehicles', 'VehicleController@index');
-Route::get('vehicles/{vehicle}', 'VehicleController@show')
-    ->where('vehicle', '[0-9]+');
+});
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::group(['prefix' => 'manufacturers'], function () {
+        Route::get('/', 'ManufacturerController@index');
+        Route::get('{manufacturer}/models', 'ManufacturerController@getModels')
+            ->where('manufacturer', '[0-9]+');
+        Route::get('{manufacturer}/vehicles', 'ManufacturerController@getVehicles')
+            ->where('manufacturer', '[0-9]+');
+        Route::get('{manufacturer}', 'ManufacturerController@show')
+            ->where('manufacturer', '[0-9]+');
+    });
+
+    Route::group(['prefix' => 'vehicles'], function () {
+        Route::get('/', 'VehicleController@index');
+        Route::get('{vehicle}', 'VehicleController@show')
+            ->where('vehicle', '[0-9]+');
+    });
+});
+
 
 
 

@@ -29,7 +29,7 @@
  - Start the API server
 	 - `php artisan server`
  - Install the client
-	 - '`cd client`
+	 - `cd client`
 	 - `npm install`
  - Start the client server
 	 - `npm run serve`

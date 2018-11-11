@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use App\Vehicle;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -12,12 +14,34 @@ class VehiclesTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $user;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create(
+            ['password' => Hash::make('password')]
+        );
+    }
+
+    /** @test */
+    public function unauthenticated_users_cannot_access_the_vehicles_resource()
+    {
+        $this->json('GET', '/api/vehicles')
+            ->assertStatus(401);
+
+        $this->json('GET', '/api/vehicles/1')
+            ->assertStatus(401);
+    }
+
     /** @test */
     public function a_json_response_of_vehicles_is_returned()
     {
         $vehicles = factory(Vehicle::class, 5)->create();
 
-        $this->json('GET', '/api/vehicles')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertJsonCount(5, 'data')
@@ -31,7 +55,8 @@ class VehiclesTest extends TestCase
     {
         $vehicles = factory(Vehicle::class, 5)->create();
 
-        $this->json('GET', '/api/vehicles')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($vehicles->first()->manufacturer->name)
@@ -47,7 +72,8 @@ class VehiclesTest extends TestCase
 
         $vehicle = factory(Vehicle::class)->create();
 
-        $this->json('GET', '/api/vehicles/' . $vehicle->id)
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/vehicles/' . $vehicle->id)
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($vehicle->type)
@@ -61,7 +87,8 @@ class VehiclesTest extends TestCase
 
         $vehicle = factory(Vehicle::class)->create();
 
-        $this->json('GET', '/api/vehicles/' . $vehicle->id)
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/vehicles/' . $vehicle->id)
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($vehicle->owner->last_name)
@@ -72,7 +99,8 @@ class VehiclesTest extends TestCase
     /** @test */
     public function an_incorrect_request_for_a_vehicle_returns_json_404()
     {
-        $this->json('GET', '/api/vehicles/not-found')
+        $this->actingAs($this->user, 'api')
+            ->json('GET', '/api/vehicles/not-found')
             ->assertStatus(404)
             ->assertHeader('Content-Type', 'application/json')
             ->assertJson([
