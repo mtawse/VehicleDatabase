@@ -9,7 +9,10 @@
 
 ## Client
 
-- Vue.js 2.5 - [Vuetify](https://vuetifyjs.com/en/) - [Vuex](https://vuex.vuejs.org/) - [Axios](https://www.axios.com/)
+- Vue.js 2.5
+  - [Vuetify](https://vuetifyjs.com/en/)
+  - [Vuex](https://vuex.vuejs.org/)
+  - [Axios](https://www.axios.com/)
 
 ## Installation
 
@@ -25,13 +28,17 @@
 - Import data
   - `php artisan db:seed`
   - If you get any errors during seeing run `composer dump-autoload`
-- Start the API server - `php artisan server`
-- Install the client - `cd client` - `npm install`
-- Start the client server - `npm run serve`
+- Start the API server - `php artisan serve`
+- Install the client 
+  - `cd client` 
+  - `npm install`
+- Start the client server 
+  - `npm run serve`
 - If the API server is not running on `http://127.0.0.1:8000` you will need to update `client/vue.config.js`
 
 ## Usage
 
+- Vist the site on the URL prived by the node server
 - Login with default credentials:
   - Username: test@localhost.com
   - Password: password
