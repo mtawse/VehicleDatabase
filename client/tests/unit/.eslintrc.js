@@ -1,9 +1,9 @@
 module.exports = {
   env: {
     mocha: true,
-  },
-  rules: {
-    'space-before-function-paren': 'never',
-    'prefer-template': 'never',
+    rules: {
+      'object-shorthand': 0,
+      'space-before-function-paren': 0,
+    },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <v-toolbar>
     <router-link to="/" class=toolbar-title>
-    <v-toolbar-title>Vehicles Database</v-toolbar-title>
+      <v-toolbar-title>Vehicles Database</v-toolbar-title>
     </router-link>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
