@@ -39,11 +39,6 @@ export default {
   },
   computed: {
     formattedOwner: function() {
-      // return {
-      //   Name: this.owner.full_name,
-      //   Company: this.owner.company,
-      //   Profession: this.owner.profession,
-      // };
       return [
         {
           label: 'Name',

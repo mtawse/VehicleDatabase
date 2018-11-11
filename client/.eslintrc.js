@@ -10,6 +10,8 @@ module.exports = {
     'object-shorthand': 0,
     'space-before-function-paren': 0,
     'func-names': 0,
+    'no-param-reassign': 0,
+    'implicit-arrow-linebreak': 0,
   },
   parserOptions: {
     parser: 'babel-eslint',

@@ -5,14 +5,19 @@
     </router-link>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat to="/vehicles">Vehicles</v-btn>
+      <v-btn v-if="!isLoggedIn" flat to="/login">Login</v-btn>
+      <v-btn v-if="isLoggedIn" flat to="/vehicles">Vehicles</v-btn>
+      <v-btn v-if="isLoggedIn" flat to="/logout">Logout</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
+import Auth from '../mixins/Auth';
+
 export default {
   name: 'Navigation',
+  mixins: [Auth],
 };
 </script>
 
