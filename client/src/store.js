@@ -5,12 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-
+    baseUrl: '/api',
   },
-  mutations: {
-
-  },
-  actions: {
-
-  },
+  mutations: {},
+  actions: {},
 });
