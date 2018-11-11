@@ -33,7 +33,7 @@ class VehicleResource extends JsonResource
             'colour' => $this->colour,
             'is_hgv' => $this->is_hgv,
             'no_doors' => $this->no_doors,
-            'sunroof' => $this->sunroof,
+            'has_sunroof' => $this->has_sunroof,
             'has_gps' => $this->has_gps,
             'no_wheels' => $this->no_wheels,
             'engine_cc' => $this->engine_cc,

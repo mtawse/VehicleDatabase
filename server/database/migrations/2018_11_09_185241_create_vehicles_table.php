@@ -29,7 +29,7 @@ class CreateVehiclesTable extends Migration
             $table->string('colour', 100);
             $table->boolean('is_hgv')->default(false);
             $table->unsignedInteger('no_doors');
-            $table->boolean('sunroof')->default(false);
+            $table->boolean('has_sunroof')->default(false);
             $table->boolean('has_gps')->default(false);
             $table->unsignedInteger('no_wheels');
             $table->unsignedInteger('engine_cc');

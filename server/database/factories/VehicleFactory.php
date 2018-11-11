@@ -26,7 +26,7 @@ $factory->define(App\Vehicle::class, function (Faker $faker) {
         'colour' => $faker->colorName,
         'is_hgv' => $faker->boolean(5),
         'no_doors' => $faker->numberBetween(0, 7),
-        'sunroof' => $faker->boolean(50),
+        'has_sunroof' => $faker->boolean(50),
         'has_gps' => $faker->boolean(50),
         'no_wheels' => $faker->numberBetween(1, 20),
         'engine_cc' => $faker->numberBetween(500, 20000),

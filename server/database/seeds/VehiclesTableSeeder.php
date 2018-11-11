@@ -39,7 +39,7 @@ class VehiclesTableSeeder extends Seeder
             $vehicleModel->colour = $vehicle['colour'];
             $vehicleModel->is_hgv = filter_var($vehicle['is_hgv'], FILTER_VALIDATE_BOOLEAN);
             $vehicleModel->no_doors = (int) $vehicle['no_doors'];
-            $vehicleModel->sunroof = filter_var($vehicle['sunroof'], FILTER_VALIDATE_BOOLEAN);
+            $vehicleModel->has_sunroof = filter_var($vehicle['sunroof'], FILTER_VALIDATE_BOOLEAN);
             $vehicleModel->has_gps = filter_var($vehicle['has_gps'], FILTER_VALIDATE_BOOLEAN);
             $vehicleModel->no_wheels = (int) $vehicle['no_wheels'];
             $vehicleModel->engine_cc = (int) $vehicle['engine_cc'];
