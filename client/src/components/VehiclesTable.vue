@@ -16,8 +16,7 @@
       <td>{{ props.item.manufacturer.name }}</td>
       <td>{{ props.item.model.name }}</td>
       <td>{{ props.item.type }}</td>
-      <td>{{ props.item.fue_type }}</td>
-      <td>{{ props.item.usage }}</td>
+      <td>{{ props.item.fuel_type }}</td>
       <td>{{ props.item.colour }}</td>
     </template>
   </v-data-table>
@@ -35,7 +34,6 @@ export default {
         { text: 'Model', value: 'model.name' },
         { text: 'Type', value: 'type' },
         { text: 'Fuel Type', value: 'fuel_type' },
-        { text: 'Usage', value: 'usage' },
         { text: 'Colour', value: 'colour' },
       ],
     };

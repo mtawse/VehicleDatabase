@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex xs12 sm8 offset-sm2>
         <h1>All Vehicles</h1>
          <VehiclesTable :vehicles="vehicles"></VehiclesTable>
       </v-flex>
