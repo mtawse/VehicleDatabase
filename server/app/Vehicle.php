@@ -59,6 +59,9 @@ class Vehicle extends Eloquent
 
     public function getColourAttribute($value)
     {
+        // Colour names are capitalized without spaces
+        // e.g. DarkGoldenRod
+        // Split by capital letter
         $pieces = preg_split('/(?=[A-Z])/', $value);
         return implode(' ', array_filter($pieces));
     }
