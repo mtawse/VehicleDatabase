@@ -15,11 +15,6 @@ export default {
   components: {
     Navigation,
   },
-  computed: {
-    isLoggedIn() {
-      return store.state.isLoggedIn;
-    },
-  },
 };
 </script>
 <style>

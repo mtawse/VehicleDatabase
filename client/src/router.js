@@ -5,6 +5,8 @@ import store from './store';
 import Home from './views/Home.vue';
 import Vehicle from './views/Vehicle.vue';
 import Vehicles from './views/Vehicles.vue';
+import Manufacturer from './views/Manufacturer.vue';
+import Manufacturers from './views/Manufacturers.vue';
 import Login from './views/Login.vue';
 import LogoutComponent from './components/LogoutComponent.vue';
 
@@ -30,6 +32,17 @@ const router = new Router({
       path: '/vehicles/:id',
       name: 'vehicle',
       component: Vehicle,
+      props: true,
+    },
+    {
+      path: '/manufacturers',
+      name: 'manufacturers',
+      component: Manufacturers,
+    },
+    {
+      path: '/manufacturers/:id',
+      name: 'manufacturer',
+      component: Manufacturer,
       props: true,
     },
     {

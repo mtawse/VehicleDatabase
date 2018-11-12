@@ -59,13 +59,13 @@ export default {
   created() {
     HTTP()
       .get(`vehicles/${this.id}`)
-      .then((response) => {
+      .then(response => {
         this.vehicle = response.data.data;
         this.manufacturer = this.vehicle.manufacturer;
         this.model = this.vehicle.model;
         this.owner = this.vehicle.owner;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   },

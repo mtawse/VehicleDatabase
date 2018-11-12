@@ -6,6 +6,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn v-if="!isLoggedIn" flat to="/login">Login</v-btn>
+      <v-btn v-if="isLoggedIn" flat to="/manufacturers">Manufacturers</v-btn>
       <v-btn v-if="isLoggedIn" flat to="/vehicles">Vehicles</v-btn>
       <v-btn v-if="isLoggedIn" flat to="/logout">Logout</v-btn>
     </v-toolbar-items>

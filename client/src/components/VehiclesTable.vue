@@ -13,7 +13,13 @@
           {{ props.item.license_plate }}
         </router-link>
       </td>
-      <td>{{ props.item.manufacturer.name }}</td>
+      <td>
+        <router-link
+          :to="{ name: 'manufacturer', params: { id: props.item.manufacturer.id }}"
+        >
+          {{ props.item.manufacturer.name }}
+        </router-link>
+      </td>
       <td>{{ props.item.model.name }}</td>
       <td>{{ props.item.type }}</td>
       <td>{{ props.item.fuel_type }}</td>

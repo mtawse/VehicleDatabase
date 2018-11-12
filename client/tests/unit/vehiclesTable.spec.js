@@ -17,7 +17,7 @@ describe('VehiclesTable', () => {
       stubs: ['router-link', 'router-view'],
       propsData: { vehicles },
     });
-    vehicles.forEach((vehicle) => {
+    vehicles.forEach(vehicle => {
       expect(wrapper.text()).to.include(vehicle.license_plate);
       expect(wrapper.text()).to.include(vehicle.manufacturer.name);
       expect(wrapper.text()).to.include(vehicle.model.name);

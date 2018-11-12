@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm8 offset-sm2>
-        <h1>All Vehicles</h1>
+        <h1>{{ manufacturer.name }}</h1>
          <VehiclesTable :vehicles="vehicles"></VehiclesTable>
       </v-flex>
     </v-layout>
@@ -14,21 +14,22 @@ import HTTP from '../http';
 import VehiclesTable from '@/components/VehiclesTable.vue';
 
 export default {
-  name: 'Vehicles',
+  props: ['id'],
   components: {
     VehiclesTable,
   },
   data() {
     return {
+      manufacturer: {},
       vehicles: [],
     };
   },
   created() {
     HTTP()
-      .get('vehicles')
+      .get(`manufacturers/${this.id}/vehicles`)
       .then(response => {
-        console.log(response);
-        this.vehicles = response.data.data;
+        this.manufacturer = response.data.data;
+        this.vehicles = this.manufacturer.vehicles;
       })
       .catch(error => {
         console.log(error);

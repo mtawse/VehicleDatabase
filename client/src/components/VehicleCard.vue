@@ -34,6 +34,7 @@ export default {
   props: ['vehicle', 'manufacturer', 'model'],
   computed: {
     formattedVehicle: function() {
+      console.log(this.vehicle);
       return [
         {
           label: 'Manufacturer',
