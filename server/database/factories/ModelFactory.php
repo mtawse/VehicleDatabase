@@ -7,6 +7,6 @@ $factory->define(App\Model::class, function (Faker $faker) {
         'manufacturer_id' => function () {
                 return factory(App\Manufacturer::class)->create()->id;
             },
-        'name' => $faker->word,
+        'name' => $faker->text(10),
     ];
 });
