@@ -18,8 +18,8 @@ class ModelController extends Controller
         return new ModelResource($model);
     }
 
-    public function getVehicles(Model $model)
-    {
-        return new  ModelResource($model->load('vehicles'));
-    }
+//    public function getVehicles(Model $model)
+//    {
+//        return new  ModelResource($model->load('vehicles'));
+//    }
 }

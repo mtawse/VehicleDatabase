@@ -24,45 +24,20 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::group(['prefix' => 'manufacturers'], function () {
 
-        Route::get('{manufacturer}/models', 'ManufacturerController@getModels')
-            ->where('manufacturer', '[0-9]+');
-        Route::get('{manufacturer}/vehicles', 'ManufacturerController@getVehicles')
-            ->where('manufacturer', '[0-9]+');
-        Route::get('{manufacturer}', 'ManufacturerController@show')
-            ->where('manufacturer', '[0-9]+');
-        Route::get('/', 'ManufacturerController@index');
+    Route::resource('manufacturers', 'ManufacturerController')->only(['index', 'show']);
+    Route::resource('manufacturers.models', 'Manufacturer\ModelController')->only(['index']);
+    Route::resource('manufacturers.vehicles', 'Manufacturer\VehicleController')->only(['index']);
 
-    });
 
-    Route::group(['prefix' => 'models'], function () {
+    Route::resource('models', 'ModelController')->only(['index', 'show']);
+    Route::resource('models.vehicles', 'Model\VehicleController')->only(['index']);
 
-        Route::get('{model}/vehicles', 'ModelController@getVehicles')
-            ->where('model', '[0-9]+');
-        Route::get('{model}', 'ModelController@show')
-            ->where('model', '[0-9]+');
-        Route::get('/', 'ModelController@index');
+    Route::resource('vehicles', 'VehicleController')->only(['index', 'show']);
 
-    });
+    Route::resource('owners', 'OwnerController')->only(['index', 'show']);
+    Route::resource('owners.vehicles', 'Owner\VehicleController')->only(['index']);
 
-    Route::group(['prefix' => 'vehicles'], function () {
-
-        Route::get('{vehicle}', 'VehicleController@show')
-            ->where('vehicle', '[0-9]+');
-        Route::get('/', 'VehicleController@index');
-
-    });
-
-    Route::group(['prefix' => 'owners'], function () {
-
-        Route::get('{owner}/vehicles', 'OwnerController@getVehicles')
-            ->where('owner', '[0-9]+');
-        Route::get('{owner}', 'OwnerController@show')
-            ->where('owner', '[0-9]+');
-        Route::get('/', 'OwnerController@index');
-
-    });
 });
 
 

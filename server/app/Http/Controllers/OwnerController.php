@@ -17,9 +17,4 @@ class OwnerController extends Controller
     {
         return new OwnerResource($owner);
     }
-
-    public function getVehicles(Owner $owner)
-    {
-        return new  OwnerResource($owner->load('vehicles'));
-    }
 }

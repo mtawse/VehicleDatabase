@@ -19,16 +19,4 @@ class ManufacturerController extends Controller
     {
         return new ManufacturerResource($manufacturer);
     }
-
-
-    public function getModels(Manufacturer $manufacturer)
-    {
-        return new ManufacturerResource($manufacturer->load('models'));
-    }
-
-    public function getVehicles(Manufacturer $manufacturer)
-    {
-        return new ManufacturerResource($manufacturer->load('vehicles'));
-    }
-
 }

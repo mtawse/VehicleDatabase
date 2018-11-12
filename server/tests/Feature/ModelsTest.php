@@ -54,6 +54,7 @@ class ModelsTest extends BaseFeatureTest
     /** @test */
     public function a_json_response_of_vehicles_can_be_returned_with_a_single_model()
     {
+        $this->withoutExceptionHandling();
         $manufacturer = factory(Manufacturer::class)->create();
         $model = factory(Model::class)->create(['manufacturer_id' => $manufacturer->id]);
         $vehicles = factory(Vehicle::class, 3)->create([
