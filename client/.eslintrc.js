@@ -12,6 +12,7 @@ module.exports = {
     'func-names': 0,
     'no-param-reassign': 0,
     'implicit-arrow-linebreak': 0,
+    'arrow-params': 0,
   },
   parserOptions: {
     parser: 'babel-eslint',
