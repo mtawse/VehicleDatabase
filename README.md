@@ -23,7 +23,7 @@
 - Set up sqlite database
   - `touch database/database.sqlite`
   - `cp .env.example .env`
-  - `DB_DATABASE=/absolute/path/to/VehicleDatabase/server/database/database.sqlite`
+  - Update .env `DB_DATABASE=/absolute/path/to/VehicleDatabase/server/database/database.sqlite`
   - `php artisan migrate`
 - Import data
   - `php artisan db:seed`
