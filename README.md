@@ -1,4 +1,4 @@
-# VehicleDatabase
+# Vehicle Database
 
 ## Server
 
@@ -38,12 +38,12 @@
 
 ## Usage
 
-- Vist the site on the URL prived by the node server
+- Visit the site on the URL provided by the node server
 - Login with default credentials:
   - Username: test@localhost.com
   - Password: password
 - View a list of all vehicles, including manufacturer and model details
-- View and individual vehicle too see all details including the owner
+- View an individual vehicle too see all details including the owner
 
 ### Tests
 
@@ -59,6 +59,5 @@
 
 ## ToDo
 
-- Authentication (JWT)
-- Additional views for Manufacturers and Models
-- Pagination of API response and client list views
+- Additional client views for Models and Owners
+- Pagination, filtering and sorting in both API and client
