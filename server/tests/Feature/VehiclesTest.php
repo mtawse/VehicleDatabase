@@ -2,28 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Vehicle;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class VehiclesTest extends TestCase
+class VehiclesTest extends BaseFeatureTest
 {
     use DatabaseMigrations;
-
-    protected $user;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->user = factory(User::class)->create(
-            ['password' => Hash::make('password')]
-        );
-    }
 
     /** @test */
     public function unauthenticated_users_cannot_access_the_vehicles_resource()

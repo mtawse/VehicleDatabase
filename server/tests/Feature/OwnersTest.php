@@ -3,28 +3,14 @@
 namespace Tests\Feature;
 
 use App\Owner;
-use App\User;
 use App\Vehicle;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class OwnersTest extends TestCase
+class OwnersTest extends BaseFeatureTest
 {
     use DatabaseMigrations;
-
-    protected $user;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->user = factory(User::class)->create(
-            ['password' => Hash::make('password')]
-        );
-    }
 
     /** @test */
     public function unauthenticated_users_cannot_access_the_owners_resource()
