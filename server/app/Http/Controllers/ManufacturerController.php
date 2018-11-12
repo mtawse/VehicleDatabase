@@ -22,12 +22,11 @@ class ManufacturerController extends Controller
 
     public function getModels(Manufacturer $manufacturer)
     {
-        $manufacturer = Manufacturer::with('models')->find($manufacturer->id);
-        return new ManufacturerResource($manufacturer);
+        return new ManufacturerResource($manufacturer->load('models'));
     }
 
     public function getVehicles(Manufacturer $manufacturer)
     {
-        return response()->json($manufacturer->with('vehicles')->get(), 200);
+        return new ManufacturerResource($manufacturer->load('vehicles'));
     }
 }

@@ -30,10 +30,10 @@ class ManufacturesTest extends TestCase
     /** @test */
     public function unauthenticated_users_cannot_access_the_manufacturers_resource()
     {
-        $this->json('GET', '/api/vehicles')
+        $this->json('GET', '/api/manufacturers')
             ->assertStatus(401);
 
-        $this->json('GET', '/api/vehicles/1')
+        $this->json('GET', '/api/manufacturers/1')
             ->assertStatus(401);
     }
 

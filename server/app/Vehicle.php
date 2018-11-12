@@ -8,6 +8,19 @@ class Vehicle extends Eloquent
 {
     protected $with = ['manufacturer', 'model'];
 
+    protected $casts = [
+        'weight_category' => 'int',
+        'engine_cc' => 'int',
+        'no_doors' => 'int',
+        'no_seats' => 'int',
+        'no_wheels' => 'int',
+        'is_hgv' => 'boolean',
+        'has_sunroof' => 'boolean',
+        'has_boot' => 'boolean',
+        'has_gps' => 'boolean',
+        'has_trailer' => 'boolean',
+    ];
+
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
