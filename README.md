@@ -60,4 +60,5 @@
 ## ToDo
 
 - Additional client views for Models and Owners
+- Additional client tests around authenticated views
 - Pagination, filtering and sorting in both API and client
