@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AuthController extends Controller
+class JwtAuthController extends Controller
 {
     /**
      * Create a new AuthController instance.
