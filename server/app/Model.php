@@ -10,4 +10,9 @@ class Model extends Eloquent
     {
         return $this->hasOne(Manufacturer::class);
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 }

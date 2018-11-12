@@ -38,13 +38,13 @@ class VehiclesTest extends TestCase
     /** @test */
     public function a_json_response_of_vehicles_is_returned()
     {
-        $vehicles = factory(Vehicle::class, 5)->create();
+        $vehicles = factory(Vehicle::class, 3)->create();
 
         $this->actingAs($this->user, 'api')
             ->json('GET', '/api/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJsonCount(5, 'data')
+            ->assertJsonCount(3, 'data')
             ->assertSee($vehicles->first()->type)
             ->assertSee($vehicles->last()->license_plate);
 
@@ -53,7 +53,7 @@ class VehiclesTest extends TestCase
     /** @test */
     public function when_a_collection_of_vehicles_is_returned_the_manufacturer_and_model_is_included()
     {
-        $vehicles = factory(Vehicle::class, 5)->create();
+        $vehicles = factory(Vehicle::class, 3)->create();
 
         $this->actingAs($this->user, 'api')
             ->json('GET', '/api/vehicles')

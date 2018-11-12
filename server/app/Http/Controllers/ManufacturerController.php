@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model;
 use App\Manufacturer;
 use Illuminate\Http\Request;
 use App\Http\Resources\ManufacturerResource;
@@ -29,4 +30,5 @@ class ManufacturerController extends Controller
     {
         return new ManufacturerResource($manufacturer->load('vehicles'));
     }
+
 }

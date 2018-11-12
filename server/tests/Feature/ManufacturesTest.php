@@ -40,13 +40,13 @@ class ManufacturesTest extends TestCase
     /** @test */
     public function a_json_response_of_manufacturers_is_returned()
     {
-        $manufacturers = factory(Manufacturer::class, 5)->create();
+        $manufacturers = factory(Manufacturer::class, 3)->create();
 
         $this->actingAs($this->user, 'api')
             ->json('GET', '/api/manufacturers')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertJsonCount(5, 'data')
+            ->assertJsonCount(3, 'data')
             ->assertSee($manufacturers->first()->name)
             ->assertSee($manufacturers->last()->name);
 
@@ -68,16 +68,19 @@ class ManufacturesTest extends TestCase
     /** @test */
     public function a_json_response_of_models_can_be_returned_with_a_single_manufacturer()
     {
-        $this->withoutExceptionHandling();
         $manufacturer = factory(Manufacturer::class)->create();
-        $models = factory(Model::class, 5)->create(['manufacturer_id' => $manufacturer->id]);
+        $models = factory(Model::class, 3)->create(['manufacturer_id' => $manufacturer->id]);
+
+        $unrelatedModel = factory(Model::class)->create();
 
         $this->actingAs($this->user, 'api')
             ->json('GET', '/api/manufacturers/' . $manufacturer->id . '/models')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($models->first()->name)
-            ->assertSee($models->last()->name);
+            ->assertSee($models->last()->name)
+            ->assertJsonCount(3, 'data.models')
+            ->assertDontSee($unrelatedModel->name);
     }
 
 
@@ -85,14 +88,18 @@ class ManufacturesTest extends TestCase
     public function a_json_response_of_vehicles_can_be_returned_with_a_single_manufacturer()
     {
         $manufacturer = factory(Manufacturer::class)->create();
-        $vehicles = factory(Vehicle::class, 5)->create(['manufacturer_id' => $manufacturer->id]);
+        $vehicles = factory(Vehicle::class, 3)->create(['manufacturer_id' => $manufacturer->id]);
+
+        $unrelatedVehicle = factory(Vehicle::class)->create();
 
         $this->actingAs($this->user, 'api')
             ->json('GET', '/api/manufacturers/' . $manufacturer->id . '/vehicles')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/json')
             ->assertSee($vehicles->first()->license_plate)
-            ->assertSee($vehicles->last()->no_doors);
+            ->assertSee($vehicles->last()->no_doors)
+            ->assertJsonCount(3, 'data.vehicles')
+            ->assertDontSee($unrelatedVehicle->license_plate);
     }
 
 
