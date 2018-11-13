@@ -45,7 +45,7 @@ export default {
           value: this.owner.full_name,
         },
         {
-          label: 'Compnay',
+          label: 'Company',
           value: this.owner.company,
         },
         {
